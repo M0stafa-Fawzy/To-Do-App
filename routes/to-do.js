@@ -4,11 +4,12 @@ const {
     createToDo,
     getSingleToDo,
     updateToDo,
-    deleteToDo
+    deleteToDo,
+    getAllToDos
 } = require("../controllers/to-do")
 
 router.use(auth)
-router.route("/").post(createToDo)
+router.route("/").post(createToDo).get(getAllToDos)
 router.route('/:todoID')
     .get(getSingleToDo)
     .put(updateToDo)

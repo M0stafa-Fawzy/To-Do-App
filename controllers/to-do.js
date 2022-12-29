@@ -61,3 +61,8 @@ exports.deleteToDo = asyncHandler(async (req, res, next) => {
     return res.status(200).json({ message: "DELETED", toDo })
 })
 
+exports.getAllToDos = asyncHandler(async (req, res, next) => {
+    const { id } = req
+    const toDos = await TodO.find({ userId: id })
+    return res.status(200).json({ message: "OK", toDos })
+})
