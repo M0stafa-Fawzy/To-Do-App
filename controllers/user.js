@@ -8,7 +8,7 @@ exports.signup = asyncHandler(async (req, res, next) => {
 
     const user = await User.create({
         username,
-        email,
+        email: email.toLowerCase(),
         password
     })
     if(!user) throw new CustomError('user not created', 400)
@@ -21,7 +21,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     const { email, password } = req.body
     if(!email || !password) throw new CustomError('email and password are required',400)
 
-    const user = await User.findUser(email, password)
+    const user = await User.findUser(email.toLowerCase(), password)
     const token = user.generateAuthToken()
 
     return res.status(200).json({ user, token })
